@@ -1,0 +1,105 @@
+﻿<!-- ============================================================================
+     Программу разработали: Гарафутдинов А.Р.; Зайнабиддинов И.К.
+     =========
+     MainWindow.xaml | Главное окно = ВЫБОР РЕЖИМА ТЕРМИНАЛА.
+     Терминалов по ТЗ три, программа одна - при установке обладатель один раз
+     выбирает, каким терминалом будет работать эта ЭВМ.
+     Всё содержимое обёрнуто в Viewbox - интерфейс тянется от 6" экрана до ТВ.
+     ============================================================================ -->
+<local:KioskWindow x:Class="AvtoParkingKAI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AvtoParkingKAI"
+        mc:Ignorable="d"
+        Title="АвтоПарковка КАИ">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- шапка: логотип КАИ слева, кнопка-флаг переключения языка справа -->
+        <Grid Grid.Row="0" Margin="20,14,20,0">
+            <Image x:Name="imgLogo" Height="64" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="btnYazyk"
+                    Style="{StaticResource HoverScaleButtonStyle}"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Padding="12,6"
+                    Click="BtnYazyk_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{DynamicResource loc_FlagImage}" Height="22" Margin="0,0,8,0"/>
+                    <TextBlock Text="{DynamicResource loc_FlagText}" FontSize="18" FontWeight="Bold"
+                               Foreground="{StaticResource TekstBrush}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- центральный контент: масштабируется Viewbox-ом под любой экран.
+             Height 620 -> 680: запас по вертикали под рост кнопок на 1.2
+             (HoverScaleButtonStyle) - RenderTransform не расширяет layout,
+             и без запаса края выросшей кнопки резались бы Viewbox-ом -->
+        <Viewbox Grid.Row="1" Stretch="Uniform" Margin="30">
+            <Grid Width="1280" Height="680">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource ZagolovokStyle}" Text="{DynamicResource loc_VyborRezhima}"/>
+                    <TextBlock Style="{StaticResource PodskazkaStyle}" Text="{DynamicResource loc_PodskazkaVybor}"
+                               Margin="0,12,0,50" MaxWidth="900"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <!-- Терминал 1: зелёный акцент (въезд = "свободно/открыто").
+                             Width (не только MinWidth) + TextWrapping=Wrap на подписи -
+                             иначе длинный текст (особенно английский) не помещается и
+                             обрезается по границе Viewbox-а вместо переноса на строку. -->
+                        <Button x:Name="btnTerminal1"
+                                Style="{StaticResource HoverScaleButtonStyle}"
+                                Background="{StaticResource UspehBrush}"
+                                Foreground="{StaticResource TemnyTekstBrush}"
+                                Width="360" MinHeight="170" Margin="18"
+                                FontSize="24"
+                                Click="BtnTerminal1_Click">
+                            <TextBlock Text="{DynamicResource loc_Terminal1}" TextAlignment="Center"
+                                       TextWrapping="Wrap" MaxWidth="300"/>
+                        </Button>
+                        <!-- Терминал 2: жёлтый акцент (оплата = "ожидание/обработка") -->
+                        <Button x:Name="btnTerminal2"
+                                Style="{StaticResource HoverScaleButtonStyle}"
+                                Background="{StaticResource OzhidanieBrush}"
+                                Foreground="{StaticResource TemnyTekstBrush}"
+                                Width="360" MinHeight="170" Margin="18"
+                                FontSize="24"
+                                Click="BtnTerminal2_Click">
+                            <TextBlock Text="{DynamicResource loc_Terminal2}" TextAlignment="Center"
+                                       TextWrapping="Wrap" MaxWidth="300"/>
+                        </Button>
+                        <!-- Терминал 3: голубой акцент (выезд = информация/активность) -->
+                        <Button x:Name="btnTerminal3"
+                                Style="{StaticResource HoverScaleButtonStyle}"
+                                Background="{StaticResource InfoBrush}"
+                                Foreground="{StaticResource TemnyTekstBrush}"
+                                Width="360" MinHeight="170" Margin="18"
+                                FontSize="24"
+                                Click="BtnTerminal3_Click">
+                            <TextBlock Text="{DynamicResource loc_Terminal3}" TextAlignment="Center"
+                                       TextWrapping="Wrap" MaxWidth="300"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Viewbox>
+
+        <!-- копирайт (обязателен на каждом окне по ТЗ) -->
+        <TextBlock Grid.Row="2" Style="{StaticResource KopiraytStyle}" Text="{DynamicResource loc_Copyright}"/>
+
+        <!-- оверлей "сбой времени" - блокирует весь терминал -->
+        <Border x:Name="overlayVremya" Grid.RowSpan="3" Background="#E61A1D21" Visibility="Collapsed">
+            <Border Background="{StaticResource PoverhnostBrush}" CornerRadius="20"
+                    BorderBrush="{StaticResource OshibkaBrush}" BorderThickness="3"
+                    MaxWidth="1000" Padding="40" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="{DynamicResource loc_VremyaBlok}" Foreground="{StaticResource OshibkaBrush}"
+                           FontSize="34" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
+            </Border>
+        </Border>
+    </Grid>
+</local:KioskWindow>

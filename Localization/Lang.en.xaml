@@ -1,0 +1,146 @@
+<!-- ============================================================================
+     Программу разработали: Гарафутдинов А.Р.; Зайнабиддинов И.К.
+     =========
+     Lang.en.xaml | English localization.
+     The flag here is RUSSIAN - the button shows the language you will
+     switch TO (tap the Russian flag to get the Russian UI back).
+     ============================================================================ -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Flag of Russia (white-blue-red tricolor) -->
+    <DrawingImage x:Key="loc_FlagImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 L60,0 60,36 0,36 Z">
+                <GeometryDrawing Brush="#FFFFFF">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0,60,12"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#0039A6">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,12,60,12"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#D52B1E">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,24,60,12"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <sys:String x:Key="loc_FlagText">РУ</sys:String>
+
+    <!-- Common -->
+    <sys:String x:Key="loc_Copyright">program version 1.0 |©| authors: students of KNRTU-KAI 4110 /JACA/ /YUP/</sys:String>
+    <sys:String x:Key="loc_VremyaBlok">SYSTEM TIME FAILURE DETECTED!&#10;TERMINAL IS LOCKED. PLEASE CONTACT THE STAFF.</sys:String>
+
+    <!-- Main window (mode selection) -->
+    <sys:String x:Key="loc_VyborRezhima">TERMINAL MODE SELECTION</sys:String>
+    <sys:String x:Key="loc_PodskazkaVybor">Select the operating mode of this terminal (configured once by the owner during installation)</sys:String>
+    <sys:String x:Key="loc_Terminal1">TERMINAL #1&#10;ENTRY / PASS CARD ISSUE</sys:String>
+    <sys:String x:Key="loc_Terminal2">TERMINAL #2&#10;PARKING PAYMENT</sys:String>
+    <sys:String x:Key="loc_Terminal3">TERMINAL #3&#10;EXIT</sys:String>
+
+    <!-- interface1 - entry terminal -->
+    <sys:String x:Key="loc_PoluchitKartu">GET A PASS CARD</sys:String>
+    <sys:String x:Key="loc_CenaZaChas">Price per hour:</sys:String>
+    <sys:String x:Key="loc_Rub">RUB</sys:String>
+    <sys:String x:Key="loc_OzhidanieKarty">INSERT THE PASS CARD (USB DRIVE) INTO THE READER...</sys:String>
+    <sys:String x:Key="loc_Proezzhayte">PLEASE DRIVE THROUGH</sys:String>
+    <sys:String x:Key="loc_NeZabudte">DO NOT FORGET TO TAKE YOUR PASS CARD</sys:String>
+    <sys:String x:Key="loc_OshibkaZapisi">CARD WRITE ERROR! PLEASE TRY ANOTHER CARD</sys:String>
+
+    <!-- interface2 - payment terminal -->
+    <sys:String x:Key="loc_OplataParkovki">PARKING PAYMENT</sys:String>
+    <sys:String x:Key="loc_PodnesiteDlyaRascheta">PRESENT YOUR PASS CARD (INSERT USB) TO CALCULATE THE PRICE</sys:String>
+    <sys:String x:Key="loc_VremyaZaezda">Entry time:</sys:String>
+    <sys:String x:Key="loc_VremyaStoyanki">Parking duration:</sys:String>
+    <sys:String x:Key="loc_KOplate">TOTAL DUE:</sys:String>
+    <sys:String x:Key="loc_OplatitTerminal">PAY AT THE TERMINAL</sys:String>
+    <sys:String x:Key="loc_OplatitOnline">PAY ONLINE</sys:String>
+    <sys:String x:Key="loc_NomerKarty">Enter your bank card number (16 digits):</sys:String>
+    <sys:String x:Key="loc_Oplatit">PAY</sys:String>
+    <sys:String x:Key="loc_Soedinenie">Connecting to the bank...</sys:String>
+    <sys:String x:Key="loc_ObrabotkaPlatezha">Processing payment...</sys:String>
+    <sys:String x:Key="loc_Odobreno">APPROVED! PAYMENT SUCCESSFUL</sys:String>
+    <sys:String x:Key="loc_VyzovDisp">CALL DISPATCHER</sys:String>
+    <sys:String x:Key="loc_DispVyzvan">Dispatcher called, please wait...</sys:String>
+    <sys:String x:Key="loc_Lgota">BENEFIT CONFIRMED BY DISPATCHER. PRICE: 0 RUB. HAVE A NICE TRIP!</sys:String>
+    <sys:String x:Key="loc_VstavteKartuLgota">DISPATCHER KEY ACCEPTED! INSERT THE PASS CARD TO RECORD THE FREE EXIT</sys:String>
+    <sys:String x:Key="loc_Besplatno">YOU ARE WITHIN THE FREE PERIOD - NO PAYMENT REQUIRED</sys:String>
+    <sys:String x:Key="loc_UzheOplacheno">PARKING IS ALREADY PAID. YOU MAY LEAVE</sys:String>
+    <sys:String x:Key="loc_KartaNeSchitana">CARD NOT READ / DAMAGED</sys:String>
+    <sys:String x:Key="loc_Neverno16">Invalid card number! Exactly 16 digits required.</sys:String>
+    <sys:String x:Key="loc_Chas">h</sys:String>
+    <sys:String x:Key="loc_Min">min</sys:String>
+
+    <!-- interface3 - exit terminal -->
+    <sys:String x:Key="loc_PodnesiteKartu">PRESENT YOUR PASS CARD</sys:String>
+    <sys:String x:Key="loc_Prinyato">ACCEPTED</sys:String>
+    <sys:String x:Key="loc_Otkazano">DENIED</sys:String>
+    <sys:String x:Key="loc_KTerminalu2">PLEASE GO TO TERMINAL 2 AND PAY FOR PARKING</sys:String>
+    <sys:String x:Key="loc_Priezzhayte">COME AGAIN ;)&#10;WE ARE WAITING FOR YOU</sys:String>
+
+    <!-- EditPanel - owner mode -->
+    <sys:String x:Key="loc_VhodObladatel">ENTER EDIT MODE (OWNER)</sys:String>
+    <sys:String x:Key="loc_Voyti">LOG IN</sys:String>
+    <sys:String x:Key="loc_PokazatParol">show password</sys:String>
+    <sys:String x:Key="loc_ZabyliParol">forgot password?</sys:String>
+    <sys:String x:Key="loc_SbrosParolya">PASSWORD RESET</sys:String>
+    <sys:String x:Key="loc_Login">Login</sys:String>
+    <sys:String x:Key="loc_KodProdukta">Product code (exactly 10 characters)</sys:String>
+    <sys:String x:Key="loc_Sbrosit">RESET PASSWORD</sys:String>
+    <sys:String x:Key="loc_NevernyParol">Wrong password! Try again.</sys:String>
+    <sys:String x:Key="loc_LoginOshibka">WARNING: the login must not contain special characters or Cyrillic letters</sys:String>
+    <sys:String x:Key="loc_NevernyKodFmt">You entered the product code incorrectly (you have {0} attempts to enter the product code)</sys:String>
+    <sys:String x:Key="loc_BlokFmt">TIME UNTIL THE NEXT PASSWORD RESET ATTEMPT: {0}</sys:String>
+    <sys:String x:Key="loc_VvediteNovyParol">PLEASE ENTER A NEW PASSWORD</sys:String>
+    <sys:String x:Key="loc_PovtoriteParol">Repeat the new password</sys:String>
+    <sys:String x:Key="loc_PrinyatParol">ACCEPT PASSWORD</sys:String>
+    <sys:String x:Key="loc_ParoliNeSovpadayut">Passwords do not match!</sys:String>
+    <sys:String x:Key="loc_StaryParolPopup">please enter a different password because you are entering the previous one</sys:String>
+    <sys:String x:Key="loc_ParolIzmenen">Password changed successfully!</sys:String>
+    <sys:String x:Key="loc_PanelRedakt">EDIT PANEL (OWNER)</sys:String>
+    <sys:String x:Key="loc_SysVremya">Terminal system time:</sys:String>
+    <sys:String x:Key="loc_NovoeVremya">New time (dd.mm.yyyy hh:mm):</sys:String>
+    <sys:String x:Key="loc_UstanovitVremya">SET TIME</sys:String>
+    <sys:String x:Key="loc_BesplatnoM">Free parking M:</sys:String>
+    <sys:String x:Key="loc_VyezdN">Exit time N:</sys:String>
+    <sys:String x:Key="loc_CenaChasEdit">Price per hour (RUB):</sys:String>
+    <sys:String x:Key="loc_Sohranit">SAVE SETTINGS</sys:String>
+    <sys:String x:Key="loc_Sohraneno">Settings saved!</sys:String>
+    <sys:String x:Key="loc_OshibkaVvoda">Input error! Make sure you entered positive numbers.</sys:String>
+    <sys:String x:Key="loc_TrebuetsyaAdmin">Failed to change the time: run the program as administrator.</sys:String>
+    <sys:String x:Key="loc_VremyaUstanovleno">System time changed successfully.</sys:String>
+    <sys:String x:Key="loc_Vernutsya">BACK TO TERMINAL</sys:String>
+    <sys:String x:Key="loc_Zavershit">EXIT PROGRAM</sys:String>
+    <sys:String x:Key="loc_SozdatDispKey">WRITE DISPATCHER KEY TO USB</sys:String>
+    <sys:String x:Key="loc_DispKeyGotov">Dispatcher key written to the USB drive!</sys:String>
+    <sys:String x:Key="loc_NetFleshki">USB drive not found! Insert a flash drive.</sys:String>
+    <sys:String x:Key="loc_IzmenitParol">CHANGE PASSWORD</sys:String>
+    <sys:String x:Key="loc_Otmena">CANCEL</sys:String>
+    <sys:String x:Key="loc_RezhimTerminalaLabel">This terminal's operating mode:</sys:String>
+    <sys:String x:Key="loc_RezhimSprashivat">Ask on every startup (default)</sys:String>
+    <sys:String x:Key="loc_RezhimT1">Terminal 1 — parking zone entry pass issuance</sys:String>
+    <sys:String x:Key="loc_RezhimT2">Terminal 2 — parking payment</sys:String>
+    <sys:String x:Key="loc_RezhimT3">Terminal 3 — parking zone exit permission</sys:String>
+    <sys:String x:Key="loc_EdinitsaVremeniLabel">Time unit for M and N:</sys:String>
+    <sys:String x:Key="loc_EdMinuty">Minutes (default)</sys:String>
+    <sys:String x:Key="loc_EdChasy">Hours</sys:String>
+    <sys:String x:Key="loc_EdSekundy">Seconds</sys:String>
+
+    <!-- interface2 - info block and online payment page -->
+    <sys:String x:Key="loc_DoPovysheniya">Time until the price increases:</sys:String>
+    <sys:String x:Key="loc_DoKontsaBesplatnogo">Free period ends in:</sys:String>
+    <sys:String x:Key="loc_ZatemBudet">Then due:</sys:String>
+    <sys:String x:Key="loc_OplataOnlaynZagolovok">SECURE ONLINE PAYMENT</sys:String>
+    <sys:String x:Key="loc_NomerKartyPole">Card number</sys:String>
+    <sys:String x:Key="loc_SrokPole">Expiry date (MM/YY)</sys:String>
+    <sys:String x:Key="loc_CvcPole">CVC/CVV (3 digits)</sys:String>
+    <sys:String x:Key="loc_NevernySrok">Invalid card expiry date!</sys:String>
+    <sys:String x:Key="loc_NevernyCvc">CVC must be exactly 3 digits!</sys:String>
+
+</ResourceDictionary>

@@ -1,0 +1,12 @@
+﻿# Visual Studio
+.vs/
+bin/
+obj/
+*.user
+*.suo
+# VS Code
+.vscode/
+# Публикация
+publish/
+# Временные файлы
+*.tmp
