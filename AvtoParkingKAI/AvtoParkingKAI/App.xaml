@@ -1,0 +1,19 @@
+<!-- StartupUri сюда намеренно НЕ возвращаем: стартовое окно выбирается в
+     App.xaml.cs (OnStartup) в зависимости от того, настроил ли обладатель
+     режим терминала в EditPanel (комбобокс "вид работы") - если да, при
+     запуске сразу открывается нужный interface, а не окно выбора. -->
+<Application x:Class="AvtoParkingKAI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AvtoParkingKAI">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- палитра и фирменные стили -->
+                <ResourceDictionary Source="Themes/CommonStyles.xaml"/>
+                <!-- язык по умолчанию (при старте подменяется из настроек) -->
+                <ResourceDictionary Source="Localization/Lang.ru.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

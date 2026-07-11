@@ -1,0 +1,351 @@
+<!-- ============================================================================
+     CommonStyles.xaml  |  Курсовой проект "АвтоПарковка КАИ"
+     Общая цветовая палитра терминала + фирменный стиль кнопок HoverScaleButtonStyle
+     (эффект увеличения ScaleTransform до 1.2 взят из старой лабы, цвета переделаны
+     под тёмную тему терминала)
+
+     У словаря есть код-behind (CommonStyles.xaml.cs) - там живёт "ответная реакция":
+     когда один элемент растёт от наведения/фокуса, соседи по той же Panel слегка
+     уменьшаются, чтобы выросший элемент не наезжал на них (см. EventSetter-ы ниже).
+     ============================================================================ -->
+<ResourceDictionary x:Class="AvtoParkingKAI.Themes.CommonStyles"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ОСНОВНАЯ ПАЛИТРА (HEX из ТЗ) -->
+    <SolidColorBrush x:Key="FonBrush"        Color="#1A1D21"/>
+    <!-- фон, холст всего интерфейса -->
+    <SolidColorBrush x:Key="PoverhnostBrush" Color="#24272B"/>
+    <!-- карточки, панели, модальные окна -->
+    <SolidColorBrush x:Key="ObvodkaBrush"    Color="#3A3E45"/>
+    <!-- рамки полей, границы кнопок -->
+    <SolidColorBrush x:Key="TekstBrush"      Color="#FFFFFF"/>
+    <!-- основной текст -->
+    <SolidColorBrush x:Key="Tekst2Brush"     Color="#B0B5BA"/>
+    <!-- подсказки, второстепенный текст -->
+    <SolidColorBrush x:Key="TemnyTekstBrush" Color="#1A1D21"/>
+    <!-- тёмный текст на ярких кнопках -->
+
+    <!-- СМЫСЛОВЫЕ АКЦЕНТЫ -->
+    <SolidColorBrush x:Key="UspehBrush"      Color="#00E676"/>
+    <!-- зелёный: "Оплачено", "Открыто" -->
+    <SolidColorBrush x:Key="OshibkaBrush"    Color="#FF6D00"/>
+    <!-- оранжевый: ошибки, запрет -->
+    <SolidColorBrush x:Key="InfoBrush"       Color="#40C4FF"/>
+    <!-- голубой: подсказки, активные поля -->
+    <SolidColorBrush x:Key="OzhidanieBrush"  Color="#FFD740"/>
+    <!-- жёлтый: "Обработка...", таймеры -->
+
+    <!-- ==================================================================
+         HoverScaleButtonStyle - фирменная кнопка.
+         Эффект: при наведении/касании кнопка плавно растёт до 1.2.
+         Работает и от мыши (IsMouseOver) и от тача (IsPressed) и от
+         клавиатуры (IsKeyboardFocused) - терминал же сенсорный!
+
+         Cursor НЕ переопределяем (раньше тут стоял Cursor="Hand" - из-за него
+         "рука" появлялась над каждой кнопкой, даже когда KioskWindow прячет
+         курсор через Cursor=None: Setter стиля кнопки перебивал унаследованное
+         от окна значение). Теперь курсор просто наследуется от окна: скрыт в
+         киоск-окнах, обычная стрелка в EditPanel (там мышь разрешена).
+
+         EventSetter-ы ниже - "ответная реакция": пока эта кнопка растёт от
+         наведения/фокуса, её соседи по Panel одновременно чуть уменьшаются
+         (см. CommonStyles.xaml.cs), чтобы рост не накладывался на них.
+         ================================================================== -->
+    <Style x:Key="HoverScaleButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource PoverhnostBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ObvodkaBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Foreground" Value="{StaticResource TekstBrush}"/>
+        <Setter Property="Padding" Value="18,10"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <EventSetter Event="Mouse.MouseEnter" Handler="Element_Aktivirovan"/>
+        <EventSetter Event="Mouse.MouseLeave" Handler="Element_Deaktivirovan"/>
+        <EventSetter Event="Keyboard.GotKeyboardFocus" Handler="Element_Aktivirovan"/>
+        <EventSetter Event="Keyboard.LostKeyboardFocus" Handler="Element_Deaktivirovan"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="14"
+                            Padding="{TemplateBinding Padding}"
+                            RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1"/>
+                        </Border.RenderTransform>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- наведение мыши/пальца: плавное увеличение до 1.2 -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <!-- фокус с клавиатуры/стрелок - растим так же, как при
+                             наведении: без мыши это единственный видимый способ
+                             понять, какой элемент сейчас выбран. ЦВЕТ рамки
+                             выделения здесь больше не зашит: его подбирает
+                             VydelenieService - противоположный цвету кнопки
+                             (на голубой кнопке голубая рамка была не видна) -->
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1.2" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1.2" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <!-- нажатие (тач-скрин генерирует именно IsPressed) -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.1"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <!-- заблокированная кнопка (исчерпаны попытки и т.п.) -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="0.35"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Поле ввода в стиле терминала: скруглённое, тёмное; рамку при фокусе
+         красит VydelenieService (контрастно цвету поля - для тёмного поля белым).
+         FocusVisualStyle=null убирает штатный пунктирный прямоугольник WPF - у нас
+         своя подсветка рамкой. EventSetter-ов "ответной реакции" тут НЕТ намеренно:
+         сам TextBox не растёт (в отличие от HoverScaleButtonStyle), поэтому не должен
+         и запускать сжатие соседей - иначе они бы сжимались без всякой видимой причины.
+         А вот РЕАГИРОВАТЬ на чужой рост (сжаться, если рядом растёт кнопка) он всё
+         равно может - это общий механизм в CommonStyles.xaml.cs, отдельной разметки
+         не требует. -->
+    <Style x:Key="TerminalTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{StaticResource PoverhnostBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TekstBrush}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource InfoBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ObvodkaBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="ramka"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- То же самое, но для PasswordBox (у него свой тип, стиль не переиспользовать) -->
+    <Style x:Key="TerminalPasswordBoxStyle" TargetType="PasswordBox">
+        <Setter Property="Background" Value="{StaticResource PoverhnostBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TekstBrush}"/>
+        <Setter Property="CaretBrush" Value="{StaticResource InfoBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ObvodkaBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border x:Name="ramka"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================================================================
+         TerminalComboBoxStyle - выпадающий список в стиле терминала
+         (нужен для выбора "вида работы" в EditPanel). Тёмная тема,
+         текст по центру; рамку при фокусе красит VydelenieService.
+         ================================================================== -->
+    <Style x:Key="TerminalComboBoxItemStyle" TargetType="ComboBoxItem">
+        <Setter Property="Padding" Value="16,12"/>
+        <Setter Property="Foreground" Value="{StaticResource TekstBrush}"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border x:Name="fonElementa" Background="Transparent" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="fonElementa" Property="Background" Value="{StaticResource ObvodkaBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="fonElementa" Property="Background" Value="{StaticResource InfoBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource TemnyTekstBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TerminalComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="Background" Value="{StaticResource PoverhnostBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource TekstBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ObvodkaBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="14,8"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource TerminalComboBoxItemStyle}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <Border x:Name="ramka"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Grid.Column="0"
+                                                   Margin="{TemplateBinding Padding}"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                   Content="{TemplateBinding SelectionBoxItem}"
+                                                   ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"/>
+                                <Path Grid.Column="1" Data="M0,0 L7,7 14,0" Stroke="{StaticResource Tekst2Brush}"
+                                      StrokeThickness="2" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <!-- прозрачная кнопка-переключатель поверх рамки: ловит клик/тач,
+                             сама рамка выше отвечает за всю визуальную часть -->
+                        <ToggleButton x:Name="tumbler"
+                                      Background="Transparent"
+                                      Focusable="False"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press">
+                            <ToggleButton.Template>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border Background="Transparent"/>
+                                </ControlTemplate>
+                            </ToggleButton.Template>
+                        </ToggleButton>
+                        <Popup x:Name="popup" Placement="Bottom" AllowsTransparency="True"
+                               Focusable="False" PopupAnimation="Fade"
+                               IsOpen="{TemplateBinding IsDropDownOpen}">
+                            <Border Background="{StaticResource PoverhnostBrush}"
+                                    BorderBrush="{StaticResource InfoBrush}" BorderThickness="2" CornerRadius="10"
+                                    Margin="0,6,0,0" MaxHeight="320"
+                                    MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,4">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- рамку при фокусе красит VydelenieService (контрастно) -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ramka" Property="Opacity" Value="0.35"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Чекбокс "показать пароль" -->
+    <Style x:Key="TerminalCheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource Tekst2Brush}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Подпись-копирайт внизу справа на каждом окне -->
+    <Style x:Key="KopiraytStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Tekst2Brush}"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="0,0,10,6"/>
+    </Style>
+
+    <!-- Большой заголовок окна -->
+    <Style x:Key="ZagolovokStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TekstBrush}"/>
+        <Setter Property="FontSize" Value="44"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Второстепенная подпись/подсказка -->
+    <Style x:Key="PodskazkaStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Tekst2Brush}"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+</ResourceDictionary>

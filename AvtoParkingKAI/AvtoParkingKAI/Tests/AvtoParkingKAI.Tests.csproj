@@ -1,0 +1,26 @@
+<!-- ============================================================================
+     AvtoParkingKAI.Tests | Unit-тесты курсового проекта.
+     Запуск: Visual Studio -> Test Explorer (Ctrl+E, T) -> Run All,
+     либо из консоли Windows: dotnet test Tests\AvtoParkingKAI.Tests.csproj
+     Тестируется ТОЛЬКО логика без UI: RaschetService (вся математика парковки
+     и валидация платёжных реквизитов), BezopasnostService (крипто), PropuskData.
+     ============================================================================ -->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net481</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest" Version="3.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AvtoParkingKAI.csproj" />
+    <!-- JavaScriptSerializer для теста полного круга флешки (JSON -> AES -> JSON) -->
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+
+</Project>

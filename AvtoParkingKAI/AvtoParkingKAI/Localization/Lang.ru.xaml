@@ -1,0 +1,180 @@
+<!-- ============================================================================
+     Lang.ru.xaml | Русская локализация терминала.
+     Подключается как MergedDictionary и подменяется на лету (DynamicResource).
+     Флаг тут АНГЛИЙСКИЙ - потому что кнопка показывает язык, НА который
+     переключимся (нажал на британский флаг - получил английский интерфейс).
+     Флаги нарисованы прямо в XAML (DrawingImage), чтобы не тащить png в ресурсы.
+     ============================================================================ -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Упрощённый флаг Великобритании (синий фон + белый/красный кресты) -->
+    <DrawingImage x:Key="loc_FlagImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 L60,0 60,36 0,36 Z">
+                <GeometryDrawing Brush="#012169">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0,60,36"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FFFFFF" Thickness="7"/>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <LineGeometry StartPoint="0,0" EndPoint="60,36"/>
+                            <LineGeometry StartPoint="60,0" EndPoint="0,36"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#C8102E" Thickness="3"/>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <LineGeometry StartPoint="0,0" EndPoint="60,36"/>
+                            <LineGeometry StartPoint="60,0" EndPoint="0,36"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FFFFFF" Thickness="12"/>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <LineGeometry StartPoint="30,0" EndPoint="30,36"/>
+                            <LineGeometry StartPoint="0,18" EndPoint="60,18"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#C8102E" Thickness="7"/>
+                    </GeometryDrawing.Pen>
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <LineGeometry StartPoint="30,0" EndPoint="30,36"/>
+                            <LineGeometry StartPoint="0,18" EndPoint="60,18"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <sys:String x:Key="loc_FlagText">EN</sys:String>
+
+    <!-- Общее -->
+    <sys:String x:Key="loc_Copyright">версия программы 1.0 |©| авторы: студенты КНИТУ-КАИ 4110 /JACA/ /YUP/</sys:String>
+    <sys:String x:Key="loc_VremyaBlok">ОБНАРУЖЕН СБОЙ СИСТЕМНОГО ВРЕМЕНИ!&#10;ТЕРМИНАЛ ЗАБЛОКИРОВАН. ОБРАТИТЕСЬ К ПЕРСОНАЛУ.</sys:String>
+
+    <!-- Главное окно (выбор режима) -->
+    <sys:String x:Key="loc_VyborRezhima">ВЫБОР РЕЖИМА ТЕРМИНАЛА</sys:String>
+    <sys:String x:Key="loc_PodskazkaVybor">Выберите вид работы данного терминала (настраивается обладателем один раз при установке)</sys:String>
+    <sys:String x:Key="loc_Terminal1">ТЕРМИНАЛ №1&#10;ВЪЕЗД / ВЫДАЧА ПРОПУСКА</sys:String>
+    <sys:String x:Key="loc_Terminal2">ТЕРМИНАЛ №2&#10;ОПЛАТА ПАРКОВКИ</sys:String>
+    <sys:String x:Key="loc_Terminal3">ТЕРМИНАЛ №3&#10;ВЫЕЗД</sys:String>
+
+    <!-- interface1 - терминал заезда -->
+    <sys:String x:Key="loc_PoluchitKartu">ПОЛУЧИТЬ КАРТУ-ПРОПУСК</sys:String>
+    <sys:String x:Key="loc_CenaZaChas">Цена за час:</sys:String>
+    <sys:String x:Key="loc_Rub">руб</sys:String>
+    <sys:String x:Key="loc_OzhidanieKarty">ВСТАВЬТЕ КАРТУ-ПРОПУСК (USB-НАКОПИТЕЛЬ) В СЧИТЫВАТЕЛЬ...</sys:String>
+    <sys:String x:Key="loc_Proezzhayte">ПОЖАЛУЙСТА ПРОЕЗЖАЙТЕ</sys:String>
+    <sys:String x:Key="loc_NeZabudte">НЕ ЗАБУДЬТЕ ЗАБРАТЬ КАРТУ-ПРОПУСК</sys:String>
+    <sys:String x:Key="loc_OshibkaZapisi">ОШИБКА ЗАПИСИ КАРТЫ! ПОПРОБУЙТЕ ДРУГУЮ КАРТУ</sys:String>
+
+    <!-- interface2 - терминал оплаты -->
+    <sys:String x:Key="loc_OplataParkovki">ОПЛАТА ПАРКОВКИ</sys:String>
+    <sys:String x:Key="loc_PodnesiteDlyaRascheta">ПОДНЕСИТЕ КАРТУ-ПРОПУСК (ВСТАВЬТЕ USB) ДЛЯ РАСЧЁТА СТОИМОСТИ</sys:String>
+    <sys:String x:Key="loc_VremyaZaezda">Время заезда:</sys:String>
+    <sys:String x:Key="loc_VremyaStoyanki">Время стоянки:</sys:String>
+    <sys:String x:Key="loc_KOplate">К ОПЛАТЕ:</sys:String>
+    <sys:String x:Key="loc_OplatitTerminal">ОПЛАТИТЬ ЧЕРЕЗ ТЕРМИНАЛ</sys:String>
+    <sys:String x:Key="loc_OplatitOnline">ОПЛАТИТЬ ОНЛАЙН</sys:String>
+    <sys:String x:Key="loc_NomerKarty">Введите номер банковской карты (16 цифр):</sys:String>
+    <sys:String x:Key="loc_Oplatit">ОПЛАТИТЬ</sys:String>
+    <sys:String x:Key="loc_Soedinenie">Соединение с банком...</sys:String>
+    <sys:String x:Key="loc_ObrabotkaPlatezha">Обработка платежа...</sys:String>
+    <sys:String x:Key="loc_Odobreno">ОДОБРЕНО! ОПЛАТА ПРОШЛА УСПЕШНО</sys:String>
+    <sys:String x:Key="loc_VyzovDisp">ВЫЗОВ ДИСПЕТЧЕРА</sys:String>
+    <sys:String x:Key="loc_DispVyzvan">Диспетчер вызван, ожидайте...</sys:String>
+    <sys:String x:Key="loc_Lgota">ЛЬГОТА ПОДТВЕРЖДЕНА ДИСПЕТЧЕРОМ. СТОИМОСТЬ: 0 руб. СЧАСТЛИВОГО ПУТИ!</sys:String>
+    <sys:String x:Key="loc_VstavteKartuLgota">КЛЮЧ ДИСПЕТЧЕРА ПРИНЯТ! ВСТАВЬТЕ КАРТУ-ПРОПУСК ДЛЯ ЗАПИСИ БЕСПЛАТНОГО ВЫЕЗДА</sys:String>
+    <sys:String x:Key="loc_Besplatno">ВЫ В ПРЕДЕЛАХ БЕСПЛАТНОГО ВРЕМЕНИ - ОПЛАТА НЕ ТРЕБУЕТСЯ</sys:String>
+    <sys:String x:Key="loc_UzheOplacheno">ПАРКОВКА УЖЕ ОПЛАЧЕНА. МОЖЕТЕ ВЫЕЗЖАТЬ</sys:String>
+    <sys:String x:Key="loc_KartaNeSchitana">КАРТА НЕ СЧИТАНА / ПОВРЕЖДЕНА</sys:String>
+    <sys:String x:Key="loc_Neverno16">Неверный номер карты! Требуется ровно 16 цифр.</sys:String>
+    <sys:String x:Key="loc_Chas">ч</sys:String>
+    <sys:String x:Key="loc_Min">мин</sys:String>
+
+    <!-- interface3 - терминал выезда -->
+    <sys:String x:Key="loc_PodnesiteKartu">ПОДНЕСИТЕ КАРТУ-ПРОПУСК</sys:String>
+    <sys:String x:Key="loc_Prinyato">ПРИНЯТО</sys:String>
+    <sys:String x:Key="loc_Otkazano">ОТКАЗАНО</sys:String>
+    <sys:String x:Key="loc_KTerminalu2">ПОЖАЛУЙСТА ПОДОЙДИТЕ К ТЕРМИНАЛУ 2 И ОПЛАТИТЕ ПАРКОВКУ</sys:String>
+    <sys:String x:Key="loc_Priezzhayte">ПРИЕЗЖАЙТЕ ЕЩЁ РАЗ ;)&#10;ЖДЁМ ВАС ОПЯТЬ</sys:String>
+
+    <!-- EditPanel - режим обладателя -->
+    <sys:String x:Key="loc_VhodObladatel">ВХОД В РЕЖИМ РЕДАКТИРОВАНИЯ (ОБЛАДАТЕЛЬ)</sys:String>
+    <sys:String x:Key="loc_Voyti">ВОЙТИ</sys:String>
+    <sys:String x:Key="loc_PokazatParol">показать пароль</sys:String>
+    <sys:String x:Key="loc_ZabyliParol">забыли пароль?</sys:String>
+    <sys:String x:Key="loc_SbrosParolya">СБРОС ПАРОЛЯ</sys:String>
+    <sys:String x:Key="loc_Login">Логин</sys:String>
+    <sys:String x:Key="loc_KodProdukta">Код продукта (ровно 10 символов)</sys:String>
+    <sys:String x:Key="loc_Sbrosit">СБРОСИТЬ ПАРОЛЬ</sys:String>
+    <sys:String x:Key="loc_NevernyParol">Неверный пароль! Попробуйте ещё раз.</sys:String>
+    <sys:String x:Key="loc_LoginOshibka">ВНИМАНИЕ: логин не должен иметь специальных символов без содержания кириллицы</sys:String>
+    <sys:String x:Key="loc_NevernyKodFmt">Вы неправильно ввели код продукта (у вас {0} попытки ввести код продукта)</sys:String>
+    <sys:String x:Key="loc_BlokFmt">ДО СЛЕДУЮЩЕЙ ПОПЫТКИ СБРОСА ПАРОЛЯ ОСТАЛОСЬ {0}</sys:String>
+    <sys:String x:Key="loc_VvediteNovyParol">ПОЖАЛУЙСТА ВВЕДИТЕ НОВЫЙ ПАРОЛЬ</sys:String>
+    <sys:String x:Key="loc_PovtoriteParol">Повторите новый пароль</sys:String>
+    <sys:String x:Key="loc_PrinyatParol">ПРИНЯТЬ ПАРОЛЬ</sys:String>
+    <sys:String x:Key="loc_ParoliNeSovpadayut">Пароли не совпадают!</sys:String>
+    <sys:String x:Key="loc_StaryParolPopup">пожалуйста введите другой пароль так-как вы вводите прошлый</sys:String>
+    <sys:String x:Key="loc_ParolIzmenen">Пароль успешно изменён!</sys:String>
+    <sys:String x:Key="loc_PanelRedakt">ПАНЕЛЬ РЕДАКТИРОВАНИЯ (ОБЛАДАТЕЛЬ)</sys:String>
+    <sys:String x:Key="loc_SysVremya">Системное время терминала:</sys:String>
+    <sys:String x:Key="loc_NovoeVremya">Новое время (дд.мм.гггг чч:мм):</sys:String>
+    <sys:String x:Key="loc_UstanovitVremya">УСТАНОВИТЬ ВРЕМЯ</sys:String>
+    <sys:String x:Key="loc_BesplatnoM">Бесплатная стоянка M:</sys:String>
+    <sys:String x:Key="loc_VyezdN">Время на выезд N:</sys:String>
+    <sys:String x:Key="loc_CenaChasEdit">Цена за час (руб):</sys:String>
+    <sys:String x:Key="loc_Sohranit">СОХРАНИТЬ НАСТРОЙКИ</sys:String>
+    <sys:String x:Key="loc_Sohraneno">Настройки сохранены!</sys:String>
+    <sys:String x:Key="loc_OshibkaVvoda">Ошибка ввода! Проверьте, что введены положительные числа.</sys:String>
+    <sys:String x:Key="loc_TrebuetsyaAdmin">Не удалось изменить время: запустите программу от имени администратора.</sys:String>
+    <sys:String x:Key="loc_VremyaUstanovleno">Системное время изменено успешно.</sys:String>
+    <sys:String x:Key="loc_Vernutsya">ВЕРНУТЬСЯ В ТЕРМИНАЛ</sys:String>
+    <sys:String x:Key="loc_Zavershit">ЗАВЕРШИТЬ ПРОГРАММУ</sys:String>
+    <sys:String x:Key="loc_SozdatDispKey">ЗАПИСАТЬ КЛЮЧ ДИСПЕТЧЕРА НА USB</sys:String>
+    <sys:String x:Key="loc_DispKeyGotov">Ключ диспетчера записан на USB-накопитель!</sys:String>
+    <sys:String x:Key="loc_NetFleshki">USB-накопитель не найден! Вставьте флешку.</sys:String>
+    <sys:String x:Key="loc_IzmenitParol">ИЗМЕНИТЬ ПАРОЛЬ</sys:String>
+    <sys:String x:Key="loc_Otmena">ОТМЕНА</sys:String>
+    <sys:String x:Key="loc_RezhimTerminalaLabel">Вид работы этого терминала:</sys:String>
+    <sys:String x:Key="loc_RezhimSprashivat">Спрашивать при каждом запуске (по умолчанию)</sys:String>
+    <sys:String x:Key="loc_RezhimT1">Терминал 1 — выдача пропуска в зону парковки</sys:String>
+    <sys:String x:Key="loc_RezhimT2">Терминал 2 — оплата услуг парковки</sys:String>
+    <sys:String x:Key="loc_RezhimT3">Терминал 3 — разрешение на выезд из зоны парковки</sys:String>
+    <sys:String x:Key="loc_EdinitsaVremeniLabel">Единица измерения времени для M и N:</sys:String>
+    <sys:String x:Key="loc_EdMinuty">Минуты (по умолчанию)</sys:String>
+    <sys:String x:Key="loc_EdChasy">Часы</sys:String>
+    <sys:String x:Key="loc_EdSekundy">Секунды</sys:String>
+
+    <!-- interface2 - информационный блок и страница онлайн-оплаты -->
+    <sys:String x:Key="loc_DoPovysheniya">До повышения стоимости:</sys:String>
+    <sys:String x:Key="loc_DoKontsaBesplatnogo">До конца бесплатного времени:</sys:String>
+    <sys:String x:Key="loc_ZatemBudet">Затем к оплате:</sys:String>
+    <sys:String x:Key="loc_OplataOnlaynZagolovok">БЕЗОПАСНАЯ ИНТЕРНЕТ-ОПЛАТА</sys:String>
+    <sys:String x:Key="loc_NomerKartyPole">Номер карты</sys:String>
+    <sys:String x:Key="loc_SrokPole">Срок действия (ММ/ГГ)</sys:String>
+    <sys:String x:Key="loc_CvcPole">CVC/CVV (3 цифры)</sys:String>
+    <sys:String x:Key="loc_NevernySrok">Неверный срок действия карты!</sys:String>
+    <sys:String x:Key="loc_NevernyCvc">CVC-код — ровно 3 цифры!</sys:String>
+
+</ResourceDictionary>
